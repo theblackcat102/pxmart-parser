@@ -8,8 +8,6 @@ def parse_entry(row):
             attributes.append(td.get_text().strip())
     return attributes
 
-
-
 def parse_html(raw_html):
     soup = BeautifulSoup(raw_html, 'lxml')
     contain_pricing = False
@@ -19,9 +17,9 @@ def parse_html(raw_html):
         if len(row.findAll('td')) == 11 and '金額' not in row_text:
             attrs = parse_entry(row)
             item = {
-                'name' :attrs[0],
+                'name' : attrs[0],
                 'count': int(attrs[1].replace('*','')),
-                'price':int(attrs[2])
+                'price': int(attrs[2]),
             }
             items.append(item)
         elif '金額' in row_text:
@@ -31,4 +29,3 @@ def parse_html(raw_html):
         assert len(items) == 0
 
     return items
-
